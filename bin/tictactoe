@@ -1,3 +1,42 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe!\n\n"
+print "How many people (humans) are playing? (0/1/2): "
+players = gets.chomp
+puts "Which player should go first and be \"X\"? (1/2): \n(Keep in mind that in Human vs. AI, humans are Player 1)"
+first = gets.chomp
+
+
+player_x = Players::Human.new("X")
+player_o = Players::Human.new("O")
+computer_x = Players::Computer.new("X")
+computer_o = Players::Computer.new("O")
+
+if players == "0"
+    if first == "1"
+        game = Game.new(computer_x, computer_o, Board.new)
+        game.play
+    elsif first == "2"
+        game = Game.new(computer_o, computer_x, Board.new)
+        game.play
+    end
+elsif players == "1"
+    if first == "1"
+        game = Game.new(player_x, computer_o, Board.new)
+        game.play
+    elsif first == "2"
+        game = Game.new(computer_x, player_o, Board.new)
+        game.play
+    end
+elsif players == "2"
+    if first == "1"
+        game = Game.new(player_x, player_o, Board.new)
+        game.play
+    elsif first == "2"
+        game = Game.new(player_o, player_x, Board.new)
+        game.play
+    end
+end
+
